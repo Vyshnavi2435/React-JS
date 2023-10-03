@@ -1,0 +1,37 @@
+import React, { usestate } from 'react';
+import DatePick from 'react-DatePick';
+import 'react-datepick/dist/react-datepick.css';
+import { addDays,eachDayOfInterval } from 'date-fns';
+
+const DaterangePick = () =>{const [StartDate ,setStartDate]=usestate(new Date(),6);
+                            const [endDate, setEndDate] = usestate(new Date(),6);
+    const handleDateChange = (dates) =>{
+        const[start,end] = dates;
+        setStartDate(start);
+        setEndDate(end);
+    };
+    const generateDateRange=() => {
+        const dates = eachDayOfInterval({start:StartDate, end:EndDate});
+        return dates.map((date) => (
+            <div 
+            key={date.toISOString()}></div>));
+    };
+    return (
+        <div>
+    
+            <h2>Date Range Picker</h2>
+            <DatePick selected = {StartDate} onChange=(date) => handleDateChange([date, addDays(date, 6)])
+            const start = {StartDate}
+            const end = {EndDate}
+            selectsRange inline 
+            />
+            <div>
+                <h3>Selected Date Range:</h3>
+                {generateDateRange()}
+            </div>
+        </div>
+        
+    );
+
+ };
+ export default DateRangePick;
